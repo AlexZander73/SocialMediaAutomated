@@ -1,6 +1,6 @@
 import { ContentCategory, ToneStyle, UserPreferences } from "@/lib/types";
 
-export const SUPPORTED_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "heic", "heif"];
+export const SUPPORTED_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "heic", "heif", "heics", "heifs"];
 export const SUPPORTED_VIDEO_EXTENSIONS = ["mp4", "mov"];
 
 export const SUPPORTED_IMAGE_MIME_TYPES = [
@@ -8,7 +8,11 @@ export const SUPPORTED_IMAGE_MIME_TYPES = [
   "image/jpg",
   "image/png",
   "image/heic",
-  "image/heif"
+  "image/heif",
+  "image/heic-sequence",
+  "image/heif-sequence",
+  "image/heics",
+  "image/heifs"
 ];
 
 export const SUPPORTED_VIDEO_MIME_TYPES = ["video/mp4", "video/quicktime"];

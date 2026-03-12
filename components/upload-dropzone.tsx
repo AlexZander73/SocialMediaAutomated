@@ -43,7 +43,7 @@ export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia
       >
         <p className="font-display text-2xl text-white">Drop media here</p>
         <p className="mx-auto mt-2 max-w-xl text-sm text-slate-300">
-          JPG, JPEG, PNG, HEIC, MP4, and MOV are supported for this MVP. Upload one or more photos and up to one video.
+          JPG, JPEG, PNG, HEIC/HEIF, MP4, and MOV are supported for this MVP. Upload one or more photos and up to one video.
         </p>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
@@ -62,7 +62,7 @@ export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia
           type="file"
           className="hidden"
           multiple
-          accept=".jpg,.jpeg,.png,.heic,.heif,.mp4,.mov,image/jpeg,image/png,image/heic,image/heif,video/mp4,video/quicktime"
+          accept="image/*,video/*,.jpg,.jpeg,.png,.heic,.heif,.heics,.heifs,.mp4,.mov,image/jpeg,image/png,image/heic,image/heif,image/heic-sequence,image/heif-sequence,video/mp4,video/quicktime"
           onChange={(event) => {
             const selected = Array.from(event.target.files || []);
             if (selected.length > 0) {
