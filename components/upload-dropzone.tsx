@@ -62,7 +62,6 @@ export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia
           type="file"
           className="hidden"
           multiple
-          accept="image/*,video/*,.jpg,.jpeg,.png,.heic,.heif,.heics,.heifs,.mp4,.mov,image/jpeg,image/png,image/heic,image/heif,image/heic-sequence,image/heif-sequence,video/mp4,video/quicktime"
           onChange={(event) => {
             const selected = Array.from(event.target.files || []);
             if (selected.length > 0) {
