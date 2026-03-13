@@ -62,6 +62,7 @@ export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia
           type="file"
           className="hidden"
           multiple
+          accept="image/*,video/*"
           onChange={(event) => {
             const selected = Array.from(event.target.files || []);
             if (selected.length > 0) {
