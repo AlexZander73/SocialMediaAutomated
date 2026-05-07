@@ -2,10 +2,35 @@ import { CATEGORY_LABELS } from "@/lib/constants";
 import { ContentContext, UploadedMedia } from "@/lib/types";
 import { formatBytes, formatDuration, isoToDisplayDate } from "@/lib/utils";
 
+interface HeapStats {
+  usedBytes: number;
+  totalBytes: number;
+  limitBytes: number;
+}
+
 interface DetectedInfoPanelProps {
   context: ContentContext | null;
   media: UploadedMedia[];
   geocodingStatus: "idle" | "loading" | "success" | "failed";
+}
+
+function readHeapStats(): HeapStats | null {
+  if (typeof performance === "undefined") {
+    return null;
+  }
+
+  const anyPerformance = performance as Performance & { memory?: { usedJSHeapSize: number; totalJSHeapSize: number; jsHeapSizeLimit: number } };
+  const memory = anyPerformance.memory;
+
+  if (!memory || !memory.usedJSHeapSize || !memory.totalJSHeapSize || !memory.jsHeapSizeLimit) {
+    return null;
+  }
+
+  return {
+    usedBytes: memory.usedJSHeapSize,
+    totalBytes: memory.totalJSHeapSize,
+    limitBytes: memory.jsHeapSizeLimit
+  };
 }
 
 function GeocodingStateTag({ status }: { status: DetectedInfoPanelProps["geocodingStatus"] }) {
@@ -22,6 +47,10 @@ function GeocodingStateTag({ status }: { status: DetectedInfoPanelProps["geocodi
 }
 
 export function DetectedInfoPanel({ context, media, geocodingStatus }: DetectedInfoPanelProps) {
+  const mediaBytes = media.reduce((sum, item) => sum + item.fileSize, 0);
+  const previewCount = media.filter((item) => item.kind === "image" && Boolean(item.previewUrl)).length;
+  const heapStats = readHeapStats();
+
   return (
     <section className="glass-card p-5 md:p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -66,6 +95,19 @@ export function DetectedInfoPanel({ context, media, geocodingStatus }: DetectedI
           <div className="mt-4 rounded-xl border border-white/10 bg-slate-900/70 p-3">
             <p className="text-xs uppercase tracking-wider text-slate-400">Resolutions</p>
             <p className="mt-1 text-sm text-white">{context.summary.resolutionSet.join(", ")}</p>
+          </div>
+
+          <div className="mt-4 rounded-xl border border-white/10 bg-slate-900/70 p-3">
+            <p className="text-xs uppercase tracking-wider text-slate-400">Memory / RAM footprint</p>
+            <p className="mt-1 text-sm text-white">
+              Uploaded files: {media.length} ({formatBytes(mediaBytes)})
+              {previewCount > 0 ? ` · Active previews: ${previewCount}` : null}
+            </p>
+            <p className="text-sm text-white">
+              {heapStats
+                ? `JS heap: ${formatBytes(heapStats.usedBytes)} used of ${formatBytes(heapStats.totalBytes)} (limit ${formatBytes(heapStats.limitBytes)})`
+                : "JS heap: Safari does not expose precise JS heap stats."}
+            </p>
           </div>
         </>
       )}

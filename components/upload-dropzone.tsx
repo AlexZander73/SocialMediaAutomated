@@ -9,19 +9,34 @@ interface UploadDropzoneProps {
   onRemoveMedia: (id: string) => void;
   onClearAll: () => void;
   isProcessing: boolean;
+  isPaused: boolean;
 }
 
-export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia, onClearAll, isProcessing }: UploadDropzoneProps) {
+export function UploadDropzone({
+  media,
+  warnings,
+  onFilesSelected,
+  onRemoveMedia,
+  onClearAll,
+  isProcessing,
+  isPaused
+}: UploadDropzoneProps) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const handlePickFiles = () => {
+    if (isPaused) {
+      return;
+    }
     fileInputRef.current?.click();
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsDragging(false);
+    if (isPaused) {
+      return;
+    }
     const dropped = Array.from(event.dataTransfer.files || []);
     if (dropped.length > 0) {
       onFilesSelected(dropped);
@@ -47,7 +62,12 @@ export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia
         </p>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-          <button type="button" className="btn-primary" onClick={handlePickFiles}>
+          <button
+            type="button"
+            className={`btn-primary ${isPaused ? "cursor-not-allowed opacity-60" : ""}`}
+            onClick={handlePickFiles}
+            disabled={isPaused}
+          >
             Choose Files
           </button>
           {media.length > 0 ? (
@@ -59,8 +79,8 @@ export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia
 
         <input
           ref={fileInputRef}
-          type="file"
           className="hidden"
+          type="file"
           multiple
           accept="image/*,video/*"
           onChange={(event) => {
@@ -70,7 +90,10 @@ export function UploadDropzone({ media, warnings, onFilesSelected, onRemoveMedia
             }
             event.currentTarget.value = "";
           }}
+          disabled={isPaused}
         />
+
+        {isPaused ? <p className="mt-2 text-xs text-amber-200">Paused after inactivity. Resume to enable uploads.</p> : null}
       </div>
 
       {isProcessing ? <p className="mt-3 text-sm text-slate-300">Processing files and extracting metadata...</p> : null}

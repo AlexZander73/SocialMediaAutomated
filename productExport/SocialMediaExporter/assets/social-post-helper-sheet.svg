@@ -1,0 +1,67 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Social Post Helper contact sheet illustration</title>
+  <desc id="desc">A dark contact-sheet style layout with upload, detected info, and editable draft cards.</desc>
+  <rect width="1600" height="900" rx="36" fill="#0B0F10"/>
+  <rect x="28" y="28" width="1544" height="844" rx="28" fill="#121819" stroke="#2B3537"/>
+  <circle cx="240" cy="154" r="180" fill="url(#glowA)" opacity="0.52"/>
+  <circle cx="1310" cy="148" r="168" fill="url(#glowB)" opacity="0.36"/>
+  <rect x="76" y="86" width="492" height="710" rx="26" fill="#171F20" stroke="#384447"/>
+  <rect x="108" y="120" width="428" height="132" rx="18" fill="#202A2C" stroke="#415154"/>
+  <rect x="132" y="148" width="132" height="72" rx="12" fill="#74D4BE"/>
+  <rect x="284" y="148" width="222" height="18" rx="9" fill="#E9D2B3"/>
+  <rect x="284" y="182" width="172" height="14" rx="7" fill="#9FB4AF" opacity="0.86"/>
+  <rect x="132" y="290" width="170" height="210" rx="18" fill="#2A3538"/>
+  <rect x="322" y="290" width="182" height="210" rx="18" fill="#2A3538"/>
+  <rect x="132" y="520" width="372" height="242" rx="18" fill="#20292B" stroke="#3E4C4F"/>
+  <rect x="152" y="548" width="120" height="16" rx="8" fill="#F1E1CA"/>
+  <rect x="152" y="580" width="190" height="12" rx="6" fill="#9FABA8"/>
+  <rect x="152" y="620" width="312" height="12" rx="6" fill="#9FABA8"/>
+  <rect x="152" y="650" width="276" height="12" rx="6" fill="#9FABA8"/>
+  <rect x="152" y="680" width="220" height="12" rx="6" fill="#9FABA8"/>
+  <rect x="616" y="86" width="422" height="710" rx="26" fill="#191F20" stroke="#3D484B"/>
+  <rect x="650" y="122" width="354" height="98" rx="18" fill="#202A2C"/>
+  <rect x="676" y="150" width="104" height="16" rx="8" fill="#74D4BE"/>
+  <rect x="676" y="182" width="216" height="12" rx="6" fill="#E9D2B3"/>
+  <rect x="650" y="260" width="354" height="146" rx="18" fill="#242E31" stroke="#425356"/>
+  <rect x="678" y="292" width="120" height="12" rx="6" fill="#F1E1CA"/>
+  <rect x="678" y="322" width="214" height="12" rx="6" fill="#98AAA5"/>
+  <rect x="678" y="352" width="274" height="12" rx="6" fill="#98AAA5"/>
+  <rect x="650" y="432" width="354" height="146" rx="18" fill="#242E31" stroke="#425356"/>
+  <rect x="678" y="464" width="146" height="12" rx="6" fill="#F1E1CA"/>
+  <rect x="678" y="494" width="232" height="12" rx="6" fill="#98AAA5"/>
+  <rect x="678" y="524" width="258" height="12" rx="6" fill="#98AAA5"/>
+  <rect x="650" y="606" width="354" height="156" rx="18" fill="#242E31" stroke="#425356"/>
+  <rect x="678" y="638" width="128" height="12" rx="6" fill="#F1E1CA"/>
+  <rect x="678" y="668" width="248" height="12" rx="6" fill="#98AAA5"/>
+  <rect x="678" y="698" width="286" height="12" rx="6" fill="#98AAA5"/>
+  <rect x="1086" y="86" width="438" height="710" rx="26" fill="#181D1F" stroke="#3E4B4E"/>
+  <rect x="1118" y="122" width="374" height="134" rx="20" fill="#EFE0CA"/>
+  <rect x="1150" y="156" width="154" height="16" rx="8" fill="#101314"/>
+  <rect x="1150" y="190" width="288" height="12" rx="6" fill="#5F5A55"/>
+  <rect x="1150" y="220" width="246" height="12" rx="6" fill="#5F5A55"/>
+  <rect x="1118" y="288" width="374" height="134" rx="20" fill="#EFE0CA"/>
+  <rect x="1150" y="322" width="168" height="16" rx="8" fill="#101314"/>
+  <rect x="1150" y="356" width="296" height="12" rx="6" fill="#5F5A55"/>
+  <rect x="1150" y="386" width="230" height="12" rx="6" fill="#5F5A55"/>
+  <rect x="1118" y="454" width="374" height="144" rx="20" fill="#EFE0CA"/>
+  <rect x="1150" y="488" width="132" height="16" rx="8" fill="#101314"/>
+  <rect x="1150" y="522" width="302" height="12" rx="6" fill="#5F5A55"/>
+  <rect x="1150" y="552" width="264" height="12" rx="6" fill="#5F5A55"/>
+  <rect x="1118" y="634" width="184" height="100" rx="18" fill="#74D4BE"/>
+  <rect x="1322" y="634" width="170" height="100" rx="18" fill="#EC8563"/>
+  <text x="118" y="108" fill="#EADAC4" font-family="Arial, sans-serif" font-size="22" letter-spacing="4">UPLOAD</text>
+  <text x="646" y="108" fill="#EADAC4" font-family="Arial, sans-serif" font-size="22" letter-spacing="4">DETECTED INFO</text>
+  <text x="1118" y="108" fill="#101314" font-family="Arial, sans-serif" font-size="22" letter-spacing="4">DRAFT OUTPUTS</text>
+  <text x="1152" y="696" fill="#0F1516" font-family="Arial, sans-serif" font-size="24" font-weight="700">NO AI</text>
+  <text x="1348" y="696" fill="#101314" font-family="Arial, sans-serif" font-size="24" font-weight="700">EDITABLE</text>
+  <defs>
+    <radialGradient id="glowA" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(240 154) rotate(90) scale(180)">
+      <stop stop-color="#74D4BE"/>
+      <stop offset="1" stop-color="#74D4BE" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1310 148) rotate(90) scale(168)">
+      <stop stop-color="#EC8563"/>
+      <stop offset="1" stop-color="#EC8563" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

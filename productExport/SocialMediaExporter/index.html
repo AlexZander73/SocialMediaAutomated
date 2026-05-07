@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Social Post Helper | Metadata-first social drafting</title>
+    <meta
+      name="description"
+      content="Social Post Helper is a local-first web app that turns media metadata and manual context into editable social drafts without AI."
+    >
+    <meta property="og:title" content="Social Post Helper | Metadata-first social drafting">
+    <meta
+      property="og:description"
+      content="A local-first web app that turns media metadata and manual context into editable social drafts without AI."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./assets/social-post-helper-sheet.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Social Post Helper | Metadata-first social drafting">
+    <meta
+      name="twitter:description"
+      content="A local-first web app that turns media metadata and manual context into editable social drafts without AI."
+    >
+    <meta name="twitter:image" content="./assets/social-post-helper-sheet.svg">
+    <meta
+      name="product:blurb"
+      content="A local-first web app that turns media metadata and manual context into editable social drafts without AI."
+    >
+    <meta name="product:image" content="./assets/social-post-helper-sheet.svg">
+    <meta name="product:platforms" content="Web">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <a class="skip-thread" href="#main">Skip to content</a>
+
+    <header class="trace-bar">
+      <a class="trace-back" href="../../">Back to site</a>
+      <p class="trace-title">Social Post Helper / field manual</p>
+    </header>
+
+    <main id="main" class="manual-shell">
+      <section class="signal-hero" aria-labelledby="hero-heading">
+        <div class="hero-copy">
+          <p class="section-kicker">Web app / MVP / local-first</p>
+          <h1 id="hero-heading">Turn the clues already inside your media into a usable first draft.</h1>
+          <p class="hero-subhead">
+            Social Post Helper reads dates, dimensions, device fields, GPS when available, and your own notes, then
+            builds editable starting points for Instagram, Facebook, and YouTube without leaning on AI.
+          </p>
+
+          <div class="hero-actions">
+            <a class="stub-button stub-button--primary" href="#workflow">Read the workflow</a>
+            <a class="stub-button stub-button--quiet" href="#proof">Check the proof</a>
+          </div>
+
+          <dl class="field-strip" aria-label="Project quick facts">
+            <div>
+              <dt>Status</dt>
+              <dd>MVP</dd>
+            </div>
+            <div>
+              <dt>Format</dt>
+              <dd>Static-friendly web app</dd>
+            </div>
+            <div>
+              <dt>Method</dt>
+              <dd>Metadata + templates + edits</dd>
+            </div>
+          </dl>
+        </div>
+
+        <aside class="contact-board" aria-labelledby="board-title">
+          <p id="board-title" class="board-label">Documented product surface</p>
+          <img
+            class="board-image"
+            src="./assets/social-post-helper-sheet.svg"
+            alt="Illustrated contact sheet showing upload, detected info, and draft output cards."
+            width="1600"
+            height="900"
+          >
+          <p class="board-caption">Original export artwork based on the repo&apos;s documented workflow. Not a live app screenshot.</p>
+        </aside>
+      </section>
+
+      <section class="manual-block manual-block--intent" id="overview" aria-labelledby="overview-heading">
+        <div class="block-heading">
+          <p class="section-kicker">Why it exists</p>
+          <h2 id="overview-heading">A calmer first pass for social posting</h2>
+        </div>
+
+        <div class="intent-layout">
+          <article class="intent-note">
+            <h3>What it is</h3>
+            <p>
+              This repo describes Social Post Helper as a lightweight Next.js app that helps people upload media, read
+              available metadata, add a little context, and turn that into drafts they can edit, copy, or export.
+            </p>
+          </article>
+
+          <article class="intent-note">
+            <h3>Why it matters</h3>
+            <p>
+              The useful part is not pretending to understand the image. It is taking repetitive setup work off the
+              table so the user starts from a structured draft instead of a blank box.
+            </p>
+          </article>
+
+          <article class="friction-ledger" aria-labelledby="friction-heading">
+            <h3 id="friction-heading">What it reduces</h3>
+            <ul>
+              <li>Blank-page caption writing</li>
+              <li>Manual retyping of dates, locations, and media context</li>
+              <li>Inconsistent copy across Instagram, Facebook, and YouTube</li>
+              <li>Tooling creep for people who do not want AI in the loop yet</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="manual-block manual-block--features" id="features" aria-labelledby="features-heading">
+        <div class="block-heading">
+          <p class="section-kicker">Core surface</p>
+          <h2 id="features-heading">Built like a contact sheet, not a black box</h2>
+        </div>
+
+        <div class="signal-grid">
+          <article class="signal-card">
+            <h3>Metadata-first intake</h3>
+            <p>Reads created date, GPS when present, camera/device fields, file type, resolution, and video duration.</p>
+          </article>
+          <article class="signal-card">
+            <h3>Rule-based drafting</h3>
+            <p>Generates platform-specific drafts through deterministic templates instead of model output.</p>
+          </article>
+          <article class="signal-card">
+            <h3>Manual context where it counts</h3>
+            <p>Add category, what happened, audience, and notes so the drafts stay useful without pretending to see the media.</p>
+          </article>
+          <article class="signal-card">
+            <h3>Platform coverage</h3>
+            <p>Includes Instagram caption, Facebook post, YouTube title options, description, upload summary, hashtags, alt text, and a short caption.</p>
+          </article>
+          <article class="signal-card">
+            <h3>Local memory</h3>
+            <p>Preferences and the last session snapshot are stored in the browser so the workflow can reopen without accounts.</p>
+          </article>
+          <article class="signal-card">
+            <h3>Careful location handling</h3>
+            <p>Reverse geocoding is optional, with a coordinate fallback when location lookup is unavailable or disabled.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="manual-block manual-block--workflow" id="workflow" aria-labelledby="workflow-heading">
+        <div class="block-heading">
+          <p class="section-kicker">Field sequence</p>
+          <h2 id="workflow-heading">How the repo says the product should be used</h2>
+        </div>
+
+        <ol class="sequence-lane">
+          <li>
+            <h3>1. Bring in the media</h3>
+            <p>Upload one or more photos and, for this MVP, up to one video.</p>
+          </li>
+          <li>
+            <h3>2. Read the detected signal</h3>
+            <p>Review dates, dimensions, GPS availability, media mix, and the structured summary before writing.</p>
+          </li>
+          <li>
+            <h3>3. Add intent</h3>
+            <p>Pick a category, add what happened, note who the post is for, and choose tone and platform preferences.</p>
+          </li>
+          <li>
+            <h3>4. Edit the first draft</h3>
+            <p>Adjust the generated text, copy what works, and export JSON or plain text if needed.</p>
+          </li>
+        </ol>
+
+        <div class="use-case-band">
+          <article>
+            <h3>Travel or outing</h3>
+            <p>GPS and date can become a clean location-aware starting point instead of another post written from scratch.</p>
+          </article>
+          <article>
+            <h3>Project progress</h3>
+            <p>Multiple photos and a manual note become a short progress update without needing a new writing sprint.</p>
+          </article>
+          <article>
+            <h3>YouTube upload recap</h3>
+            <p>The MVP stays metadata-driven for video and turns filename, notes, date, and location into a basic publishing pack.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="manual-block manual-block--visual" id="visuals" aria-labelledby="visuals-heading">
+        <div class="block-heading">
+          <p class="section-kicker">Visual reference</p>
+          <h2 id="visuals-heading">No repo screenshots were available, so this export uses calm product diagrams instead</h2>
+        </div>
+
+        <div class="visual-pair">
+          <figure class="visual-frame">
+            <img
+              src="./assets/social-post-helper-sheet.svg"
+              alt="Illustration of a dark contact-sheet style workspace for Social Post Helper."
+              loading="lazy"
+              width="1600"
+              height="900"
+            >
+            <figcaption>Contact-sheet view: upload, detected signal, and editable draft surfaces in one frame.</figcaption>
+          </figure>
+
+          <figure class="visual-frame">
+            <img
+              src="./assets/social-post-helper-flow.svg"
+              alt="Illustrated four-step flow showing upload, detect, draft, and export."
+              loading="lazy"
+              width="1600"
+              height="900"
+            >
+            <figcaption>Workflow map: the product stays narrow and readable on purpose.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="manual-block manual-block--proof" id="proof" aria-labelledby="proof-heading">
+        <div class="block-heading">
+          <p class="section-kicker">Proof and limits</p>
+          <h2 id="proof-heading">Specific claims only</h2>
+        </div>
+
+        <div class="proof-ledger">
+          <article class="ledger-row">
+            <h3>No AI in this MVP</h3>
+            <p>The README explicitly says no LLMs, no cloud AI, no OCR, and no paid AI APIs.</p>
+          </article>
+          <article class="ledger-row">
+            <h3>Static export path documented</h3>
+            <p>The repo includes export-oriented Next.js settings and a GitHub Pages workflow for static deployment.</p>
+          </article>
+          <article class="ledger-row">
+            <h3>Validation recorded on 2026-03-17</h3>
+            <p>Local checks passed for tests, TypeScript, and lint at the time this export package was built.</p>
+          </article>
+          <article class="ledger-row">
+            <h3>Known limits stay visible</h3>
+            <p>No transcript extraction, no OCR, no direct posting, no accounts, and session restore does not reattach original file blobs.</p>
+          </article>
+        </div>
+
+        <div class="availability-note">
+          <p>
+            Repo history also shows focused compatibility work for HEIC/HEIF handling and Safari/macOS Photos picker behavior.
+            This matters because upload reliability is part of the product, not an afterthought.
+          </p>
+        </div>
+      </section>
+
+      <section class="manual-block manual-block--faq" id="faq" aria-labelledby="faq-heading">
+        <div class="block-heading">
+          <p class="section-kicker">FAQ</p>
+          <h2 id="faq-heading">Plain answers</h2>
+        </div>
+
+        <div class="faq-stack">
+          <details>
+            <summary>Is Social Post Helper using AI?</summary>
+            <p>No. The documented MVP is deterministic and metadata-first, with future AI integration isolated for later work.</p>
+          </details>
+          <details>
+            <summary>What does it actually read from the media?</summary>
+            <p>When available, it reads created date, GPS, camera or device fields, file type, image or video dimensions, and video duration.</p>
+          </details>
+          <details>
+            <summary>Where does the draft data live?</summary>
+            <p>Preferences and the last session snapshot are stored in browser <code>localStorage</code> in the MVP.</p>
+          </details>
+          <details>
+            <summary>Can it restore the original uploaded files later?</summary>
+            <p>No. The documented session restore brings back metadata context and drafts, not the original file blobs.</p>
+          </details>
+          <details>
+            <summary>What kinds of media are in scope?</summary>
+            <p>Photos are the main path, with one video supported for metadata-driven draft generation in this MVP. HEIC preview depends on browser support.</p>
+          </details>
+          <details>
+            <summary>Does it post directly to social platforms?</summary>
+            <p>No. Direct publishing, OAuth flows, accounts, scheduling, transcript extraction, and OCR are all out of scope for the current MVP.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="manual-block manual-block--cta" aria-labelledby="cta-heading">
+        <div class="cta-shell">
+          <p class="section-kicker">Final note</p>
+          <h2 id="cta-heading">Useful before it gets ambitious</h2>
+          <p>
+            Social Post Helper earns its place by making the first draft smaller, cleaner, and more honest. It is a good fit
+            for people who want structure from their own media before they want AI to rewrite everything.
+          </p>
+          <div class="hero-actions">
+            <a class="stub-button stub-button--primary" href="#overview">Read the overview again</a>
+            <a class="stub-button stub-button--quiet" href="../../">Back to site</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

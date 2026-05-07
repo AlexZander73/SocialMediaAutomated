@@ -1,0 +1,172 @@
+{
+  "product": {
+    "slug": "social-post-helper",
+    "name": "Social Post Helper",
+    "tagline": "Metadata-first drafting for social posts, without AI.",
+    "status": "MVP",
+    "category": "web app",
+    "framing": "field manual",
+    "platforms": ["Web"],
+    "supportUrl": "/support/social-post-helper/",
+    "privacyUrl": "/privacy/social-post-helper/",
+    "primaryCtaLabel": "Read the workflow",
+    "primaryCtaUrl": "#workflow",
+    "secondaryLinks": [
+      {
+        "label": "Proof and limits",
+        "url": "#proof"
+      },
+      {
+        "label": "FAQ",
+        "url": "#faq"
+      }
+    ]
+  },
+  "hero": {
+    "headline": "Turn the clues already inside your media into a usable first draft.",
+    "subhead": "Social Post Helper reads dates, dimensions, device fields, GPS when available, and your own notes, then builds editable starting points for Instagram, Facebook, and YouTube without leaning on AI."
+  },
+  "summary": "Social Post Helper is a local-first web app that reduces the manual setup work around social posting by extracting media metadata, collecting a small amount of context, and generating deterministic drafts that stay editable.",
+  "audience": [
+    "People preparing social posts from their own photos and videos",
+    "Makers sharing project progress or workshop updates",
+    "Travel or outing users who want a structured first pass before editing",
+    "Anyone who wants a metadata-first workflow before trying AI tools"
+  ],
+  "coreProblems": [
+    "Starting each social post from a blank field",
+    "Repeating the same date, location, and media context by hand",
+    "Keeping Instagram, Facebook, and YouTube copy aligned",
+    "Needing a lighter workflow than a cloud AI stack"
+  ],
+  "features": [
+    {
+      "title": "Metadata-first intake",
+      "summary": "Reads created date, GPS when present, camera or device fields, file type, resolution, and video duration when available."
+    },
+    {
+      "title": "Rule-based drafts",
+      "summary": "Generates deterministic outputs for Instagram, Facebook, YouTube, hashtags, alt text, and short captions."
+    },
+    {
+      "title": "Manual context fields",
+      "summary": "Uses category, what happened, audience, and extra notes to keep the drafts grounded in user intent."
+    },
+    {
+      "title": "Local persistence",
+      "summary": "Stores preferences and the last session snapshot in browser localStorage for a local-first MVP."
+    },
+    {
+      "title": "Optional location handling",
+      "summary": "Attempts reverse geocoding when enabled and falls back to coordinates when lookup is unavailable."
+    },
+    {
+      "title": "Editable export path",
+      "summary": "Lets the user edit generated text in place, then copy or export it as JSON or plain text."
+    }
+  ],
+  "workflows": [
+    {
+      "title": "Upload and detect",
+      "summary": "Bring in one or more photos and up to one video, then review the detected metadata summary before writing."
+    },
+    {
+      "title": "Set context",
+      "summary": "Choose a category, add short notes, and set tone or platform preferences so the first draft matches the job."
+    },
+    {
+      "title": "Edit and export",
+      "summary": "Use the generated outputs as a first pass, then adjust, copy, or export the drafts."
+    }
+  ],
+  "proofPoints": [
+    {
+      "label": "AI dependence",
+      "value": "None in the MVP",
+      "note": "README explicitly says no LLMs, no cloud AI, no OCR, and no paid AI APIs."
+    },
+    {
+      "label": "Validation",
+      "value": "9 tests + typecheck + lint passed",
+      "note": "Local verification completed on 2026-03-17."
+    },
+    {
+      "label": "Deployment surface",
+      "value": "Static export + GitHub Pages",
+      "note": "Documented in next.config.ts and the Pages workflow."
+    },
+    {
+      "label": "Known limits",
+      "value": "Clear and documented",
+      "note": "No transcript extraction, OCR, direct posting, accounts, or restored file blobs in session replay."
+    }
+  ],
+  "faq": [
+    {
+      "question": "Is Social Post Helper using AI?",
+      "answer": "No. The documented MVP is deterministic and metadata-first, with future AI integration isolated for later work."
+    },
+    {
+      "question": "What does it read from media files?",
+      "answer": "When available, it reads created date, GPS, camera or device fields, file type, image or video dimensions, and video duration."
+    },
+    {
+      "question": "Where does the data live in the MVP?",
+      "answer": "Preferences and the last session snapshot are stored in browser localStorage."
+    },
+    {
+      "question": "Can it restore the original uploads later?",
+      "answer": "No. The documented restore path brings back metadata context and drafts, not original file blobs."
+    },
+    {
+      "question": "What is out of scope right now?",
+      "answer": "Direct posting, OAuth flows, scheduling, transcript extraction, OCR, user accounts, and cloud database features are all outside the current MVP."
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./assets/social-post-helper-sheet.svg",
+      "alt": "Illustrated contact sheet showing upload, detected info, and draft outputs.",
+      "caption": "Original export illustration based on the repo's documented workflow; not a live app screenshot."
+    },
+    {
+      "src": "./assets/social-post-helper-flow.svg",
+      "alt": "Illustrated four-step workflow for upload, detect, draft, and export.",
+      "caption": "Original export illustration showing the documented flow from media upload to edited draft."
+    }
+  ],
+  "catalog": {
+    "title": "Social Post Helper",
+    "blurb": "A local-first web app that turns media metadata and manual context into editable social drafts without AI.",
+    "image": "./assets/social-post-helper-sheet.svg",
+    "platforms": "Web"
+  },
+  "notes": {
+    "repoArchetypeReasoning": [
+      "README describes a Next.js app with uploads, metadata extraction, editable draft generation, and local storage.",
+      "next.config.ts and the GitHub Pages workflow point to a browser-delivered product surface.",
+      "Folder structure and UI component names show an end-user web application rather than a library or internal service."
+    ],
+    "safeSourcesUsed": [
+      "README.md",
+      "package.json",
+      "app/layout.tsx",
+      "app/globals.css",
+      "next.config.ts",
+      ".github/workflows/deploy-pages.yml",
+      "git log"
+    ],
+    "assumptions": [
+      "Support and privacy URLs are placeholders for later central-site hookup.",
+      "No screenshots or logos were present in the repo, so the export uses original SVG artwork instead.",
+      "The public-facing category is treated as a web app because the documented delivery model is browser-based."
+    ],
+    "missingButUsefulAssets": [
+      "Real product screenshots",
+      "A dedicated product icon or wordmark",
+      "Final support page URL",
+      "Final privacy page URL",
+      "A stable public product or repository URL if the central site should link out"
+    ]
+  }
+}

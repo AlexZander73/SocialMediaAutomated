@@ -25,6 +25,9 @@ import {
 } from "@/lib/types";
 import { dedupe, isoToDisplayDate, uniqueId } from "@/lib/utils";
 
+const INACTIVITY_PAUSE_MS = 5 * 60 * 1000;
+const PAUSE_WARNING = "App paused after 5 minutes of inactivity to reduce memory usage.";
+
 const EMPTY_MANUAL_INPUTS: ManualInputs = {
   whatHappened: "",
   whoIsThisFor: "",
@@ -101,11 +104,16 @@ function cloneSeedMedia(): UploadedMedia[] {
   }));
 }
 
+function withoutPreviews(media: UploadedMedia[]): UploadedMedia[] {
+  return media.map((item) => (item.previewUrl?.startsWith("blob:") ? { ...item, previewUrl: undefined } : item));
+}
+
 export default function HomePage() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [warnings, setWarnings] = useState<string[]>([]);
   const [geocodingStatus, setGeocodingStatus] = useState<"idle" | "loading" | "success" | "failed">("idle");
+  const [isPaused, setIsPaused] = useState(false);
 
   const [media, setMedia] = useState<UploadedMedia[]>([]);
   const [category, setCategory] = useState<ContentCategory>("personal-update");
@@ -118,6 +126,10 @@ export default function HomePage() {
 
   const draftsRef = useRef<DraftOutput[]>([]);
   const mediaRef = useRef<UploadedMedia[]>([]);
+  const pauseTimerRef = useRef<number | null>(null);
+  const isPausedRef = useRef(false);
+  const schedulePauseRef = useRef<() => void>(() => {});
+  const resumeFromPauseRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     draftsRef.current = drafts;
@@ -144,6 +156,94 @@ export default function HomePage() {
     };
   }, []);
 
+  const clearPauseTimer = () => {
+    if (pauseTimerRef.current !== null) {
+      window.clearTimeout(pauseTimerRef.current);
+      pauseTimerRef.current = null;
+    }
+  };
+
+  const schedulePause = () => {
+    clearPauseTimer();
+    if (isPausedRef.current || typeof document === "undefined") {
+      return;
+    }
+    pauseTimerRef.current = window.setTimeout(() => {
+      if (document.hidden || !document.hasFocus()) {
+        setIsPaused((current) => {
+          if (current) {
+            return current;
+          }
+          return true;
+        });
+
+        isPausedRef.current = true;
+        setIsProcessing(false);
+        revokePreviewUrls(mediaRef.current);
+        setMedia((existing) => withoutPreviews(existing));
+        setGeocodingStatus("idle");
+        appendWarnings([PAUSE_WARNING]);
+      }
+    }, INACTIVITY_PAUSE_MS);
+  };
+
+  const resumeFromPause = () => {
+    clearPauseTimer();
+    if (!isPausedRef.current) {
+      return;
+    }
+    isPausedRef.current = false;
+    setIsPaused(false);
+    appendWarnings(["Resumed after inactivity pause."]);
+  };
+
+  schedulePauseRef.current = schedulePause;
+  resumeFromPauseRef.current = resumeFromPause;
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    const handleVisibility = () => {
+      if (document.hidden) {
+        schedulePauseRef.current();
+        return;
+      }
+
+      clearPauseTimer();
+      if (isPausedRef.current) {
+        resumeFromPauseRef.current();
+      }
+    };
+
+    const handleBlur = () => {
+      schedulePauseRef.current();
+    };
+
+    const handleFocus = () => {
+      clearPauseTimer();
+      if (isPausedRef.current) {
+        resumeFromPauseRef.current();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("blur", handleBlur);
+    window.addEventListener("focus", handleFocus);
+
+    if (document.hidden || !document.hasFocus()) {
+      schedulePauseRef.current();
+    }
+
+    return () => {
+      clearPauseTimer();
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("blur", handleBlur);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, []);
+
   const supportedMedia = useMemo(() => media.filter((item) => item.kind !== "unsupported"), [media]);
 
   const appendWarnings = (nextWarnings: string[]): void => {
@@ -155,6 +255,11 @@ export default function HomePage() {
   };
 
   const handleFilesSelected = async (selectedFiles: File[]): Promise<void> => {
+    if (isPaused) {
+      appendWarnings(["App is currently paused. Click Resume to allow uploads."]);
+      return;
+    }
+
     if (selectedFiles.length === 0) {
       return;
     }
@@ -164,11 +269,20 @@ export default function HomePage() {
     try {
       const nextMedia: UploadedMedia[] = [];
       const nextWarnings: string[] = [];
+      let pausedDuringExtraction = false;
 
       let currentVideoCount = mediaRef.current.filter((item) => item.kind === "video").length;
 
       for (const file of selectedFiles) {
         const extracted = await extractMediaFromFile(file);
+
+        if (isPausedRef.current) {
+          if (extracted.previewUrl?.startsWith("blob:")) {
+            URL.revokeObjectURL(extracted.previewUrl);
+          }
+          pausedDuringExtraction = true;
+          break;
+        }
 
         if (extracted.kind === "video" && currentVideoCount >= 1) {
           if (extracted.previewUrl?.startsWith("blob:")) {
@@ -191,6 +305,15 @@ export default function HomePage() {
         }
 
         nextMedia.push(extracted);
+      }
+
+      if (pausedDuringExtraction || isPausedRef.current) {
+        revokePreviewUrls(nextMedia);
+        appendWarnings([
+          ...nextWarnings,
+          "Upload processing paused before completion. Resume the app and reselect those files if you still want them loaded."
+        ]);
+        return;
       }
 
       if (nextMedia.length > 0) {
@@ -226,6 +349,10 @@ export default function HomePage() {
     let cancelled = false;
 
     const buildAndGenerate = async () => {
+      if (isPaused) {
+        return;
+      }
+
       if (supportedMedia.length === 0) {
         setContext(null);
         setDrafts([]);
@@ -241,12 +368,12 @@ export default function HomePage() {
           setGeocodingStatus("loading");
           try {
             resolvedLocation = await reverseGeocodeCoordinates(firstGps);
-            if (!cancelled) {
+            if (!cancelled && !isPausedRef.current) {
               setGeocodingStatus("success");
             }
           } catch {
             resolvedLocation = coordinatesOnlyLocation(firstGps);
-            if (!cancelled) {
+            if (!cancelled && !isPausedRef.current) {
               setGeocodingStatus("failed");
               appendWarnings(["Reverse geocoding failed. Falling back to coordinates."]);
             }
@@ -260,6 +387,10 @@ export default function HomePage() {
       }
 
       if (cancelled) {
+        return;
+      }
+
+      if (isPausedRef.current) {
         return;
       }
 
@@ -290,7 +421,7 @@ export default function HomePage() {
     return () => {
       cancelled = true;
     };
-  }, [supportedMedia, category, manualInputs, preferences]);
+  }, [supportedMedia, category, manualInputs, preferences, isPaused]);
 
   const handleEditDraft = (key: DraftOutput["key"], value: string): void => {
     setDrafts((existing) => existing.map((draft) => (draft.key === key ? { ...draft, current: value } : draft)));
@@ -353,6 +484,10 @@ export default function HomePage() {
   };
 
   const handleRestoreSession = (): void => {
+    if (isPaused) {
+      resumeFromPause();
+    }
+
     if (!lastSession) {
       return;
     }
@@ -374,6 +509,9 @@ export default function HomePage() {
   };
 
   const handleLoadExample = (): void => {
+    if (isPaused) {
+      resumeFromPause();
+    }
     revokePreviewUrls(mediaRef.current);
     setMedia(cloneSeedMedia());
     setCategory("project-progress");
@@ -416,6 +554,15 @@ export default function HomePage() {
           </button>
         </section>
 
+        {isPaused ? (
+          <section className="glass-card flex flex-wrap items-center justify-between gap-3 p-4 text-sm text-amber-100">
+            <p>App is paused due to 5 minutes of inactivity. Draft generation is currently stopped and previews were released.</p>
+            <button type="button" className="btn-primary" onClick={resumeFromPause}>
+              Resume
+            </button>
+          </section>
+        ) : null}
+
         <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
           <UploadDropzone
             media={media}
@@ -424,6 +571,7 @@ export default function HomePage() {
             onRemoveMedia={handleRemoveMedia}
             onClearAll={handleClearAll}
             isProcessing={isProcessing}
+            isPaused={isPaused}
           />
           <ManualContextForm
             category={category}

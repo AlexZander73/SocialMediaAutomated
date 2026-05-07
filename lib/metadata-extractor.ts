@@ -73,26 +73,29 @@ function extractGps(exifData: Record<string, unknown>): Coordinates | undefined 
 
 async function loadImageDimensions(file: File): Promise<{ width?: number; height?: number }> {
   const imageUrl = URL.createObjectURL(file);
+  const image = new Image();
 
   try {
     const dimensions = await new Promise<{ width: number; height: number }>((resolve, reject) => {
-      const image = new Image();
       image.onload = () => resolve({ width: image.naturalWidth, height: image.naturalHeight });
       image.onerror = () => reject(new Error("Could not decode image dimensions"));
       image.src = imageUrl;
     });
     return dimensions;
   } finally {
+    image.onload = null;
+    image.onerror = null;
+    image.src = "";
     URL.revokeObjectURL(imageUrl);
   }
 }
 
 async function loadVideoBasics(file: File): Promise<{ width?: number; height?: number; durationSeconds?: number }> {
   const videoUrl = URL.createObjectURL(file);
+  const video = document.createElement("video");
 
   try {
     const metadata = await new Promise<{ width?: number; height?: number; durationSeconds?: number }>((resolve, reject) => {
-      const video = document.createElement("video");
       video.preload = "metadata";
       video.onloadedmetadata = () => {
         resolve({
@@ -106,6 +109,10 @@ async function loadVideoBasics(file: File): Promise<{ width?: number; height?: n
     });
     return metadata;
   } finally {
+    video.onloadedmetadata = null;
+    video.onerror = null;
+    video.src = "";
+    video.load();
     URL.revokeObjectURL(videoUrl);
   }
 }

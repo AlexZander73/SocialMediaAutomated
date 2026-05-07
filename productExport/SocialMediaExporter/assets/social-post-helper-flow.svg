@@ -1,0 +1,41 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Social Post Helper workflow illustration</title>
+  <desc id="desc">A four-step flow diagram for upload, detect, draft, and export.</desc>
+  <rect width="1600" height="900" rx="36" fill="#0A0D0E"/>
+  <rect x="36" y="36" width="1528" height="828" rx="28" fill="#121819" stroke="#2E393B"/>
+  <path d="M190 450H468" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M562 450H840" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M934 450H1212" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M468 450L436 422" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M468 450L436 478" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M840 450L808 422" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M840 450L808 478" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M1212 450L1180 422" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <path d="M1212 450L1180 478" stroke="#73D2BC" stroke-width="12" stroke-linecap="round"/>
+  <rect x="92" y="276" width="240" height="344" rx="28" fill="#171F20" stroke="#394548"/>
+  <rect x="464" y="216" width="240" height="464" rx="28" fill="#1A2224" stroke="#3C4A4D"/>
+  <rect x="836" y="246" width="240" height="404" rx="28" fill="#EFE0CA"/>
+  <rect x="1208" y="276" width="240" height="344" rx="28" fill="#171F20" stroke="#394548"/>
+  <rect x="124" y="312" width="176" height="110" rx="18" fill="#252F31"/>
+  <rect x="124" y="454" width="176" height="30" rx="15" fill="#73D2BC"/>
+  <rect x="124" y="506" width="136" height="14" rx="7" fill="#E9D3B7"/>
+  <rect x="124" y="536" width="164" height="14" rx="7" fill="#96AAA5"/>
+  <rect x="496" y="258" width="176" height="62" rx="18" fill="#253032"/>
+  <rect x="496" y="346" width="176" height="62" rx="18" fill="#253032"/>
+  <rect x="496" y="434" width="176" height="62" rx="18" fill="#253032"/>
+  <rect x="496" y="522" width="176" height="62" rx="18" fill="#253032"/>
+  <rect x="868" y="288" width="176" height="84" rx="18" fill="#101314"/>
+  <rect x="868" y="404" width="176" height="84" rx="18" fill="#101314"/>
+  <rect x="868" y="520" width="176" height="84" rx="18" fill="#101314"/>
+  <rect x="1240" y="320" width="176" height="84" rx="18" fill="#253032"/>
+  <rect x="1240" y="434" width="176" height="84" rx="18" fill="#253032"/>
+  <rect x="1240" y="548" width="176" height="36" rx="18" fill="#EC8563"/>
+  <text x="132" y="246" fill="#EADBC4" font-family="Arial, sans-serif" font-size="30" font-weight="700">1 / Upload</text>
+  <text x="504" y="186" fill="#EADBC4" font-family="Arial, sans-serif" font-size="30" font-weight="700">2 / Detect</text>
+  <text x="868" y="214" fill="#101314" font-family="Arial, sans-serif" font-size="30" font-weight="700">3 / Draft</text>
+  <text x="1248" y="246" fill="#EADBC4" font-family="Arial, sans-serif" font-size="30" font-weight="700">4 / Export</text>
+  <text x="136" y="648" fill="#EADBC4" font-family="Arial, sans-serif" font-size="20" letter-spacing="3">PHOTOS + ONE VIDEO</text>
+  <text x="500" y="712" fill="#EADBC4" font-family="Arial, sans-serif" font-size="20" letter-spacing="3">DATES, GPS, DEVICE FIELDS</text>
+  <text x="870" y="712" fill="#101314" font-family="Arial, sans-serif" font-size="20" letter-spacing="3">INSTAGRAM / FACEBOOK / YOUTUBE</text>
+  <text x="1242" y="648" fill="#EADBC4" font-family="Arial, sans-serif" font-size="20" letter-spacing="3">COPY OR SAVE</text>
+</svg>
